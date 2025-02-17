@@ -1,7 +1,7 @@
 # Code for sensitivity analysis of parameters in mathematical models of myocyte action potentials
 This is a suite of Python codes for sensitivity analysis of parameters in mathematical models of myocyte action potentials.
 
-The codes perform generation of the sampling, sensitivity analysis of parameters in a mathematical model of action potential, and check consistency and bias of Sobol's index estimators. 
+The codes perform the parameter range of normal response, generation of the sampling, sensitivity analysis of parameters in a mathematical model of action potential, and check consistency and bias of Sobol's index estimators. 
 
 The mathematical model used is [doi.org/10.1529/biophysj.104.047449]. 
 
