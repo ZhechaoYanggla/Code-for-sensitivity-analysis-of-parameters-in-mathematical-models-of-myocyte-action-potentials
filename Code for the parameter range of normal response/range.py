@@ -49,7 +49,7 @@ interval = np.linspace(0.0001,10,500)
 times = np.linspace(0, 50000, 500000, endpoint=False)
 
 def evaluate(a):  
-    model, protocol, script = myokit.load('shannon.mmt')
+    model, protocol, script = myokit.load('shannon_2004.mmt')
     model.set_value('INaK.p', a)
     sim = myokit.Simulation(model, protocol)
     sim.reset()
