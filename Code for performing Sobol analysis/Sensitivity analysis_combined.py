@@ -108,7 +108,7 @@ def run_simulations():
     L = param_values.shape[0]
     Yapd30, Yapd90, Yvmax, Yintegral, Yplateau, Yvrest = (np.zeros(L) for _ in range(6))
     
-    model, protocol, _ = myokit.load('shannonRado.mmt')
+    model, protocol, _ = myokit.load('shannon_2004.mmt')
     
 
 
