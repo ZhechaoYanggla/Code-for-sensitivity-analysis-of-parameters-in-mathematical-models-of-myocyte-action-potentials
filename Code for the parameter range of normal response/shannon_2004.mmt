@@ -1,3 +1,4 @@
+
 [[model]]
 author: Myokit CellML 1 API
 documentation: """
@@ -183,17 +184,17 @@ gamma_Nai = 0.75
     in [1]
 gamma_Nao = 0.75
     in [1]
-i_CaL = p * (i_CaL_Ca_SL + i_CaL_Ca_jct + i_CaL_Na_SL + i_CaL_Na_jct + i_CaL_K)
+i_CaL = (i_CaL_Ca_SL + i_CaL_Ca_jct + i_CaL_Na_SL + i_CaL_Na_jct + i_CaL_K)
     in [A/F]
-i_CaL_Ca_SL = temp * ICaL_fCa_gate.fCa_SL * Fx_ICaL_SL * PCa * 4 * (gamma_Cai * Ca_buffer.Ca_SL * exp(2 * cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - gamma_Cao * model_parameters.Cao) / (exp(2 * cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - 1)
+i_CaL_Ca_SL =  p * (temp * ICaL_fCa_gate.fCa_SL * Fx_ICaL_SL * PCa * 4 * (gamma_Cai * Ca_buffer.Ca_SL * exp(2 * cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - gamma_Cao * model_parameters.Cao) / (exp(2 * cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - 1))
     in [A/F]
-i_CaL_Ca_jct = temp * ICaL_fCa_gate.fCa_jct * Fx_ICaL_jct * PCa * 4 * (gamma_Cai * Ca_buffer.Ca_jct * exp(2 * cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - gamma_Cao * model_parameters.Cao) / (exp(2 * cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - 1)
+i_CaL_Ca_jct =  p * (temp * ICaL_fCa_gate.fCa_jct * Fx_ICaL_jct * PCa * 4 * (gamma_Cai * Ca_buffer.Ca_jct * exp(2 * cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - gamma_Cao * model_parameters.Cao) / (exp(2 * cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - 1))
     in [A/F]
-i_CaL_K = temp * (ICaL_fCa_gate.fCa_SL * Fx_ICaL_SL + ICaL_fCa_gate.fCa_jct * Fx_ICaL_jct) * PK * (gamma_Ki * model_parameters.Ki * exp(cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - gamma_Ko * model_parameters.Ko) / (exp(cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - 1)
+i_CaL_K =  p * (temp * (ICaL_fCa_gate.fCa_SL * Fx_ICaL_SL + ICaL_fCa_gate.fCa_jct * Fx_ICaL_jct) * PK * (gamma_Ki * model_parameters.Ki * exp(cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - gamma_Ko * model_parameters.Ko) / (exp(cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - 1))
     in [A/F]
-i_CaL_Na_SL = temp * ICaL_fCa_gate.fCa_SL * Fx_ICaL_SL * PNa * (gamma_Nai * Na_buffer.Na_SL * exp(cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - gamma_Nao * model_parameters.Nao) / (exp(cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - 1)
+i_CaL_Na_SL =  p * (temp * ICaL_fCa_gate.fCa_SL * Fx_ICaL_SL * PNa * (gamma_Nai * Na_buffer.Na_SL * exp(cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - gamma_Nao * model_parameters.Nao) / (exp(cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - 1))
     in [A/F]
-i_CaL_Na_jct = temp * ICaL_fCa_gate.fCa_jct * Fx_ICaL_jct * PNa * (gamma_Nai * Na_buffer.Na_jct * exp(cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - gamma_Nao * model_parameters.Nao) / (exp(cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - 1)
+i_CaL_Na_jct =  p * (temp * ICaL_fCa_gate.fCa_jct * Fx_ICaL_jct * PNa * (gamma_Nai * Na_buffer.Na_jct * exp(cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - gamma_Nao * model_parameters.Nao) / (exp(cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) - 1))
     in [A/F]
 temp = 0.45 * ICaL_d_gate.d * ICaL_f_gate.f * Q_CaL * cell.V * model_parameters.F^2 / (model_parameters.R * model_parameters.T)
     in [C/mol]
@@ -232,11 +233,11 @@ Fx_CaBk_jct = 0.11
     in [1]
 G_CaBk = 0.0002513 [mS/uF]
     in [mS/uF]
-i_Cab = p * (i_Cab_SL + i_Cab_jct)
+i_Cab =  (i_Cab_SL + i_Cab_jct)
     in [A/F]
-i_Cab_SL = G_CaBk * Fx_CaBk_SL * (cell.V - reversal_potentials.E_Ca_SL)
+i_Cab_SL = p * (G_CaBk * Fx_CaBk_SL * (cell.V - reversal_potentials.E_Ca_SL))
     in [A/F]
-i_Cab_jct = G_CaBk * Fx_CaBk_jct * (cell.V - reversal_potentials.E_Ca_jct)
+i_Cab_jct = p * (G_CaBk * Fx_CaBk_jct * (cell.V - reversal_potentials.E_Ca_jct))
     in [A/F]
 
 [ICap]
@@ -255,11 +256,11 @@ Q_SLCaP = Q10_SLCaP^((model_parameters.T - 310 [K]) / 10 [K])
     in [1]
 V_maxAF = 0.0673 [A/F]
     in [A/F]
-i_Cap = p * (i_Cap_jct + i_Cap_SL)
+i_Cap =  (i_Cap_jct + i_Cap_SL)
     in [A/F]
-i_Cap_SL = Q_SLCaP * V_maxAF * Fx_SLCaP_SL / (1 + (Km / Ca_buffer.Ca_SL)^H)
+i_Cap_SL = p * (Q_SLCaP * V_maxAF * Fx_SLCaP_SL / (1 + (Km / Ca_buffer.Ca_SL)^H))
     in [A/F]
-i_Cap_jct = Q_SLCaP * V_maxAF * Fx_SLCaP_jct / (1 + (Km / Ca_buffer.Ca_jct)^H)
+i_Cap_jct = p * (Q_SLCaP * V_maxAF * Fx_SLCaP_jct / (1 + (Km / Ca_buffer.Ca_jct)^H))
     in [A/F]
 
 [ICl_Ca]
@@ -335,11 +336,11 @@ G_Ks_SL = 0.07 [mS/uF] * (0.057 + 0.19 / (1 + exp((-7.2 + pCa_SL) / 0.6)))
     in [mS/uF]
 G_Ks_jct = 0.07 [mS/uF] * (0.057 + 0.19 / (1 + exp((-7.2 + pCa_jct) / 0.6)))
     in [mS/uF]
-i_Ks = p * (i_Ks_jct + i_Ks_SL)
+i_Ks =  (i_Ks_jct + i_Ks_SL)
     in [A/F]
-i_Ks_SL = Fx_Ks_SL * G_Ks_SL * IKs_Xs_gate.Xs^2 * (cell.V - E_Ks)
+i_Ks_SL = p * (Fx_Ks_SL * G_Ks_SL * IKs_Xs_gate.Xs^2 * (cell.V - E_Ks))
     in [A/F]
-i_Ks_jct = Fx_Ks_jct * G_Ks_jct * IKs_Xs_gate.Xs^2 * (cell.V - E_Ks)
+i_Ks_jct = p * (Fx_Ks_jct * G_Ks_jct * IKs_Xs_gate.Xs^2 * (cell.V - E_Ks))
     in [A/F]
 pCa_SL = -log10(Ca_buffer.Ca_SL / 1 [mM]) + 3
     in [1]
@@ -364,11 +365,11 @@ Fx_Na_jct = 0.11
     in [1]
 G_INa = 16 [mS/uF]
     in [mS/uF]
-i_Na = p * (i_Na_jct + i_Na_SL)
+i_Na =  (i_Na_jct + i_Na_SL)
     in [A/F]
-i_Na_SL = Fx_Na_SL * G_INa * openProb * (cell.V - reversal_potentials.E_Na_SL)
+i_Na_SL = p * (Fx_Na_SL * G_INa * openProb * (cell.V - reversal_potentials.E_Na_SL))
     in [A/F]
-i_Na_jct = Fx_Na_jct * G_INa * openProb * (cell.V - reversal_potentials.E_Na_jct)
+i_Na_jct = p * (Fx_Na_jct * G_INa * openProb * (cell.V - reversal_potentials.E_Na_jct))
     in [A/F]
 openProb = INa_m_gate.m^3 * INa_h_gate.h * INa_j_gate.j
     in [1]
@@ -403,11 +404,11 @@ V_max = 9 [A/F]
     in [A/F]
 eta = 0.35
     in [1]
-i_NaCa = p * (i_NaCa_jct + i_NaCa_SL)
+i_NaCa =  (i_NaCa_jct + i_NaCa_SL)
     in [A/F]
-i_NaCa_SL = Fx_NCX_SL * V_max * Ka_SL * Q_NCX * temp_SL / (K_mCai * model_parameters.Nao^HNa * (1 + (Na_buffer.Na_SL / K_mNai)^HNa) + K_mNao^HNa * Ca_buffer.Ca_SL * (1 + Ca_buffer.Ca_SL / K_mCai) + K_mCao * Na_buffer.Na_SL^HNa + Na_buffer.Na_SL^HNa * model_parameters.Cao + model_parameters.Nao^HNa * Ca_buffer.Ca_SL)
+i_NaCa_SL = p * (Fx_NCX_SL * V_max * Ka_SL * Q_NCX * temp_SL / (K_mCai * model_parameters.Nao^HNa * (1 + (Na_buffer.Na_SL / K_mNai)^HNa) + K_mNao^HNa * Ca_buffer.Ca_SL * (1 + Ca_buffer.Ca_SL / K_mCai) + K_mCao * Na_buffer.Na_SL^HNa + Na_buffer.Na_SL^HNa * model_parameters.Cao + model_parameters.Nao^HNa * Ca_buffer.Ca_SL))
     in [A/F]
-i_NaCa_jct = Fx_NCX_jct * V_max * Ka_jct * Q_NCX * temp_jct / (K_mCai * model_parameters.Nao^HNa * (1 + (Na_buffer.Na_jct / K_mNai)^HNa) + K_mNao^HNa * Ca_buffer.Ca_jct * (1 + Ca_buffer.Ca_jct / K_mCai) + K_mCao * Na_buffer.Na_jct^HNa + Na_buffer.Na_jct^HNa * model_parameters.Cao + model_parameters.Nao^HNa * Ca_buffer.Ca_jct)
+i_NaCa_jct = p * (Fx_NCX_jct * V_max * Ka_jct * Q_NCX * temp_jct / (K_mCai * model_parameters.Nao^HNa * (1 + (Na_buffer.Na_jct / K_mNai)^HNa) + K_mNao^HNa * Ca_buffer.Ca_jct * (1 + Ca_buffer.Ca_jct / K_mCai) + K_mCao * Na_buffer.Na_jct^HNa + Na_buffer.Na_jct^HNa * model_parameters.Cao + model_parameters.Nao^HNa * Ca_buffer.Ca_jct))
     in [A/F]
 ksat = 0.27
     in [1]
@@ -432,11 +433,11 @@ Km_Nai = 11 [mM]
     in [mM]
 f_NaK = 1 / (1 + 0.1245 * exp(-0.1 * cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)) + 0.0365 * sigma * exp(-cell.V * model_parameters.F / (model_parameters.R * model_parameters.T)))
     in [1]
-i_NaK = p * (i_NaK_jct + i_NaK_SL)
+i_NaK =  (i_NaK_jct + i_NaK_SL)
     in [A/F]
-i_NaK_SL = Fx_NaK_SL * I_NaK_max * f_NaK / (1 + (Km_Nai / Na_buffer.Na_SL)^H_NaK) * model_parameters.Ko / (model_parameters.Ko + Km_Ko)
+i_NaK_SL = p * (Fx_NaK_SL * I_NaK_max * f_NaK / (1 + (Km_Nai / Na_buffer.Na_SL)^H_NaK) * model_parameters.Ko / (model_parameters.Ko + Km_Ko))
     in [A/F]
-i_NaK_jct = Fx_NaK_jct * I_NaK_max * f_NaK / (1 + (Km_Nai / Na_buffer.Na_jct)^H_NaK) * model_parameters.Ko / (model_parameters.Ko + Km_Ko)
+i_NaK_jct = p * (Fx_NaK_jct * I_NaK_max * f_NaK / (1 + (Km_Nai / Na_buffer.Na_jct)^H_NaK) * model_parameters.Ko / (model_parameters.Ko + Km_Ko))
     in [A/F]
 sigma = (exp(model_parameters.Nao / 67.3 [mM]) - 1) / 7
     in [1]
@@ -473,11 +474,11 @@ Fx_NaBk_jct = 0.11
     in [1]
 G_NaBk = 0.000297 [mS/uF]
     in [mS/uF]
-i_Nab = p * (i_Nab_jct + i_Nab_SL)
+i_Nab =  (i_Nab_jct + i_Nab_SL)
     in [A/F]
-i_Nab_SL = Fx_NaBk_SL * G_NaBk * (cell.V - reversal_potentials.E_Na_SL)
+i_Nab_SL = p * (Fx_NaBk_SL * G_NaBk * (cell.V - reversal_potentials.E_Na_SL))
     in [A/F]
-i_Nab_jct = Fx_NaBk_jct * G_NaBk * (cell.V - reversal_potentials.E_Na_jct)
+i_Nab_jct = p * (Fx_NaBk_jct * G_NaBk * (cell.V - reversal_potentials.E_Na_jct))
     in [A/F]
 
 [Ions_n_reversal_potentials]
@@ -719,15 +720,21 @@ J_Na_jct_SL = (Na_buffer.Na_jct - Na_buffer.Na_SL) *  1.83129999999999992e-14 [m
     in [kat]
 
 [model_parameters]
+p1 = 1
+p2 = 1
+p3 = 1
+p4 = 1
+p5 = 1
+
 Cao = 1.8 [mM]
     in [mM]
-Cli = 15 [mM]
+Cli =  p4 * 15 [mM]
     in [mM]
-Clo = 150 [mM]
+Clo =  p5 * 150 [mM]
     in [mM]
 Cm = 1.381e-10 [F]
     in [F]
-F = 96485 [C/mol]
+F =  p3 * 96485 [C/mol]
     in [C/mol]
 Ki = 135 [mM]
     in [mM]
@@ -737,9 +744,9 @@ Mgi = 1 [mM]
     in [mM]
 Nao = 140 [mM]
     in [mM]
-R = 8314.3 [mJ/mol/K]
+R =  p1 * 8314.3 [mJ/mol/K]
     in [mJ/mol/K]
-T = 310 [K]
+T =  p2 * 310 [K]
     in [K]
 Vol_Cell =  3.14159265400000010 * (cell_radius / 1000 [1 (0.001)])^2 * cell_length / 1000 [1 (0.001)]^3
     in [L]
@@ -765,8 +772,10 @@ E_Cl = model_parameters.R * model_parameters.T / model_parameters.F * log(model_
     in [mV]
 E_K = model_parameters.R * model_parameters.T / model_parameters.F * log(model_parameters.Ko / model_parameters.Ki)
     in [mV]
-E_Na_SL = model_parameters.R * model_parameters.T / model_parameters.F * log(model_parameters.Nao / Na_buffer.Na_SL)
+E_Na_SL = -15.0
     in [mV]
+#E_Na_SL = model_parameters.R * model_parameters.T / model_parameters.F * log(model_parameters.Nao / Na_buffer.Na_SL)
+#    in [mV]
 E_Na_jct = model_parameters.R * model_parameters.T / model_parameters.F * log(model_parameters.Nao / Na_buffer.Na_jct)
     in [mV]
 
